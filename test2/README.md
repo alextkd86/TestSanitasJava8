@@ -10,3 +10,5 @@ Prueba con Spring
 5.- He introducido un Rest para hacer la llamada al alta (Pero va a petar, ya que no cargan ciertas clases de la librería y no tengo las URL y los Beans que se inyectan de las properties, por los que le he puesto un valor por defecto).
 6.- Para generar el JAR a usar, basta con run --> mvn clean package
 	A partir de ahí, coger el jar generado en el target y echarlo a andar desde la terminal con el siguiente comando --> java -jar rutaDelJar/nombreDelJar.jar.
+	
+	El rest se llama --> localhost:8080/prueba
