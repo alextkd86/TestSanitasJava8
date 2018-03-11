@@ -1,4 +1,4 @@
-package com.mycorp;
+package com.mycorp.service;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -25,6 +25,7 @@ import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 import com.ning.http.client.uri.Uri;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class Zendesk implements Closeable {
     private static final String JSON = "application/json; charset=UTF-8";
     private final boolean closeClient;
@@ -143,7 +144,8 @@ public class Zendesk implements Closeable {
         private final String name;
         private final Class[] typeParams;
 
-        public BasicAsyncCompletionHandler(Class clazz, String name, Class... typeParams) {
+        
+		public BasicAsyncCompletionHandler(Class clazz, String name, Class... typeParams) {
             this.clazz = clazz;
             this.name = name;
             this.typeParams = typeParams;
@@ -219,7 +221,7 @@ public class Zendesk implements Closeable {
         private String username = null;
         private String password = null;
         private String token = null;
-        private String oauthToken = null;
+//        private String oauthToken = null;
 
         public Builder(String url) {
             this.url = url;
@@ -234,7 +236,7 @@ public class Zendesk implements Closeable {
             this.password = password;
             if (password != null) {
                 this.token = null;
-                this.oauthToken = null;
+//                this.oauthToken = null;
             }
             return this;
         }
@@ -243,7 +245,7 @@ public class Zendesk implements Closeable {
             this.token = token;
             if (token != null) {
                 this.password = null;
-                this.oauthToken = null;
+//                this.oauthToken = null;
             }
             return this;
         }
