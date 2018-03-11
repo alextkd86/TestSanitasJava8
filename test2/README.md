@@ -7,5 +7,6 @@ Prueba con Spring
 	Así consigo quitarme todos los errores que me indicaba el eclipse.
 3.- He cambiado el pom para usar springboot.
 4.- He cambiado los catch, que eran muy generales con Exception, por excepciones más específicos.
-4.- Para generar el JAR a usar, basta con run --> mvn clean package
-	A partir de ahí, coger el jar generado en el target y echarlo a andar desde la terminal con el siguiente comando --> java -jar rutaDelJar/nombreDelJar.jar
+5.- He introducido un Rest para hacer la llamada al alta (Pero va a petar, ya que no cargan ciertas clases de la librería y no tengo las URL y los Beans que se inyectan de las properties, por los que le he puesto un valor por defecto).
+6.- Para generar el JAR a usar, basta con run --> mvn clean package
+	A partir de ahí, coger el jar generado en el target y echarlo a andar desde la terminal con el siguiente comando --> java -jar rutaDelJar/nombreDelJar.jar.
