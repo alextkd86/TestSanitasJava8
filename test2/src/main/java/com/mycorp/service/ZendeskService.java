@@ -1,5 +1,6 @@
 package com.mycorp.service;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mycorp.support.CorreoElectronico;
@@ -80,7 +83,7 @@ public class ZendeskService {
     
     public ZendeskService() throws InstantiationException, IllegalAccessException {
 //    	portalclientesWebEJBRemote = PortalClientesWebEJBRemote.class.newInstance();
-//		restTemplate = RestTemplate.class.newInstance();
+		restTemplate = RestTemplate.class.newInstance();
 //		emailService = MensajeriaService.class.newInstance();
     }
 
@@ -118,7 +121,7 @@ public class ZendeskService {
             anyadimosADatosBravo(datosBravo, cliente);
 
 
-        }catch(Exception e)
+        }catch(ParseException | RestClientException e)
         {
             LOG.error("Error al obtener los datos en BRAVO del cliente", e);
         }
@@ -132,7 +135,7 @@ public class ZendeskService {
             Ticket petiZendesk = mapper.readValue(ticket, Ticket.class);
             zendesk.createTicket(petiZendesk);
 
-        }catch(Exception e){
+        }catch(IOException e){
             LOG.error("Error al crear ticket ZENDESK", e);
             // Send email
 
@@ -188,7 +191,7 @@ public class ZendeskService {
                     idCliente = dusuario;
                     datosServicio.append("Datos recuperados del servicio de tarjeta:").append(ESCAPED_LINE_SEPARATOR).append(mapper.writeValueAsString(dusuario));
                 }
-            }catch(Exception e)
+            }catch(JsonProcessingException e)
             {
                 LOG.error("Error al obtener los datos de la tarjeta", e);
             }
@@ -213,7 +216,7 @@ public class ZendeskService {
 
                 idCliente = detallePolizaResponse.getTomador().getIdentificador();
                 datosServicio.append("Datos recuperados del servicio de tarjeta:").append(ESCAPED_LINE_SEPARATOR).append(mapper.writeValueAsString(detallePolizaResponse));
-            }catch(Exception e)
+            }catch(JsonProcessingException e)
             {
                 LOG.error("Error al obtener los datos de la poliza", e);
             }
